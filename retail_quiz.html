@@ -62,7 +62,32 @@
 
 	<script>
 		(function() {
-			function buildQuiz() {
+			const quizContainer = document.getElementById("quiz");
+			const resultsContainer = document.getElementById("results");
+			const submitButton = document.getElementById("submit");
+			loadJSON(function(response) {
+				const myQuestions = response; 
+
+  // display quiz right away
+  buildQuiz(myQuestions);
+
+  // on submit, show results
+  submitButton.addEventListener("click", showResults);
+});
+			function loadJSON(callback) {  
+				var xobj = new XMLHttpRequest();
+				xobj.overrideMimeType("application/json");
+				xobj.open('GET', 'https://rawgit.com/reshnaz/Files_to_be_served/master/questions.json', true);
+				xobj.onreadystatechange = function () {
+					if (xobj.readyState == 4 && xobj.status == "200") {
+						this.myQuestions = xobj.responseText;
+						callback(xobj.responseText);
+					}
+				};
+				xobj.send(null);
+			}
+			function buildQuiz(myQuestions) {
+				console.log(myQuestions);
     // we'll need a place to store the HTML output
     const output = [];
 
@@ -126,45 +151,6 @@ function showResults() {
     resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
 }
 
-const quizContainer = document.getElementById("quiz");
-const resultsContainer = document.getElementById("results");
-const submitButton = document.getElementById("submit");
-const myQuestions = [
-{
-	question: "Who is the strongest?",
-	answers: {
-		a: "Superman",
-		b: "The Terminator",
-		c: "Waluigi, obviously"
-	},
-	correctAnswer: "c"
-},
-{
-	question: "What is the best site ever created?",
-	answers: {
-		a: "SitePoint",
-		b: "Simple Steps Code",
-		c: "Trick question; they're both the best"
-	},
-	correctAnswer: "c"
-},
-{
-	question: "Where is Waldo really?",
-	answers: {
-		a: "Antarctica",
-		b: "Exploring the Pacific Ocean",
-		c: "Sitting in a tree",
-		d: "Minding his own business, so stop asking"
-	},
-	correctAnswer: "d"
-}
-];
-
-  // display quiz right away
-  buildQuiz();
-
-  // on submit, show results
-  submitButton.addEventListener("click", showResults);
 })();
 </script>
 </body>
