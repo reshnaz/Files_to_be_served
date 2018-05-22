@@ -77,7 +77,7 @@
 			function loadJSON(callback) {  
 				var xobj = new XMLHttpRequest();
 				xobj.overrideMimeType("application/json");
-				xobj.open('GET', 'https://rawgit.com/reshnaz/Files_to_be_served/master/questions.json', true);
+				xobj.open('GET', 'https://raw.githubusercontent.com/reshnaz/Files_to_be_served/master/questions.json', true);
 				xobj.onreadystatechange = function () {
 					if (xobj.readyState == 4 && xobj.status == "200") {
 						this.myQuestions = xobj.responseText;
@@ -92,7 +92,7 @@
     const output = [];
 
     // for each question...
-    myQuestions.forEach((currentQuestion, questionNumber) => {
+    Object.keys(myQuestions).forEach((currentQuestion, questionNumber) => {
       // we'll want to store the list of answer choices
       const answers = [];
 
