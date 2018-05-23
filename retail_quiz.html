@@ -66,7 +66,7 @@
 			const resultsContainer = document.getElementById("results");
 			const submitButton = document.getElementById("submit");
 			loadJSON(function(response) {
-				const myQuestions = jQuery.parseJSON(response); 
+				const retQuestions = jQuery.parseJSON(response); 
 
   // display quiz right away
   buildQuiz();
@@ -75,12 +75,12 @@
   submitButton.addEventListener("click", showResults);
 
   function buildQuiz() {
-  	console.log(myQuestions);
+  	console.log(retQuestions);
     // we'll need a place to store the HTML output
     const output = [];
 
     // for each question...
-    myQuestions.forEach((currentQuestion, questionNumber) => {
+    retQuestions.forEach((currentQuestion, questionNumber) => {
       // we'll want to store the list of answer choices
       const answers = [];
 
@@ -115,7 +115,7 @@ function showResults() {
     let numCorrect = 0;
 
     // for each question...
-    myQuestions.forEach((currentQuestion, questionNumber) => {
+    retQuestions.forEach((currentQuestion, questionNumber) => {
       // find selected answer
       const answerContainer = answerContainers[questionNumber];
       const selector = `input[name=question${questionNumber}]:checked`;
@@ -136,7 +136,7 @@ function showResults() {
 });
 
     // show number of correct answers out of total
-    resultsContainer.innerHTML = `You got ${numCorrect} out of ${myQuestions.length} answers right.`;
+    resultsContainer.innerHTML = `You got ${numCorrect} out of ${retQuestions.length} answers right.`;
 }
 });
 			function loadJSON(callback) {  
@@ -146,7 +146,7 @@ function showResults() {
 				xobj.open('GET', 'https://raw.githubusercontent.com/reshnaz/Files_to_be_served/master/questions.json', true);
 				xobj.onreadystatechange = function () {
 					if (xobj.readyState == 4 && xobj.status == "200") {
-						this.myQuestions = xobj.responseText;
+						this.retQuestions = xobj.responseText;
 						callback(xobj.responseText);
 					}
 				};
