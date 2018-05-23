@@ -66,33 +66,21 @@
 			const resultsContainer = document.getElementById("results");
 			const submitButton = document.getElementById("submit");
 			loadJSON(function(response) {
-				const myQuestions = response; 
+				const myQuestions = jQuery.parseJSON(response); 
 
   // display quiz right away
-  buildQuiz(myQuestions);
+  buildQuiz();
 
   // on submit, show results
   submitButton.addEventListener("click", showResults);
-});
-			function loadJSON(callback) {  
-				var xobj = new XMLHttpRequest();
-				xobj.overrideMimeType("application/json");
-				xobj.open('GET', 'https://raw.githubusercontent.com/reshnaz/Files_to_be_served/master/questions.json', true);
-				xobj.onreadystatechange = function () {
-					if (xobj.readyState == 4 && xobj.status == "200") {
-						this.myQuestions = xobj.responseText;
-						callback(xobj.responseText);
-					}
-				};
-				xobj.send(null);
-			}
-			function buildQuiz(myQuestions) {
-				console.log(myQuestions);
+
+  function buildQuiz() {
+  	console.log(myQuestions);
     // we'll need a place to store the HTML output
     const output = [];
 
     // for each question...
-    Object.keys(myQuestions).forEach((currentQuestion, questionNumber) => {
+    myQuestions.forEach((currentQuestion, questionNumber) => {
       // we'll want to store the list of answer choices
       const answers = [];
 
@@ -150,8 +138,22 @@ function showResults() {
     // show number of correct answers out of total
     resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
 }
+});
+			function loadJSON(callback) {  
+				var xobj = new XMLHttpRequest();
+				xobj.overrideMimeType("application/json");
+				// Get the quiz content from backend server. Insert path here.
+				xobj.open('GET', 'https://raw.githubusercontent.com/reshnaz/Files_to_be_served/master/questions.json', true);
+				xobj.onreadystatechange = function () {
+					if (xobj.readyState == 4 && xobj.status == "200") {
+						this.myQuestions = xobj.responseText;
+						callback(xobj.responseText);
+					}
+				};
+				xobj.send(null);
+			}
 
-})();
-</script>
+		})();
+	</script>
 </body>
 </html>
