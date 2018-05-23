@@ -24,7 +24,7 @@
 			"b": "Q3.Ob",
 			"c": "Q3.Oc"
 		},
-		"correctAnswer": "d"
+		"correctAnswer": "b"
 	},
 	{
 		"question": "Sample question 4?",
@@ -33,7 +33,7 @@
 			"b": "Q4.Ob",
 			"c": "Q4.Oc"
 		},
-		"correctAnswer": "d"
+		"correctAnswer": "a"
 	},
 	{
 		"question": "Sample question 5?",
@@ -69,7 +69,7 @@
 			"b": "Q8.Ob",
 			"c": "Q8.Oc"
 		},
-		"correctAnswer": "d"
+		"correctAnswer": "c"
 	},
 	{
 		"question": "Sample question 9?",
