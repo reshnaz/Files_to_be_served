@@ -1,4 +1,5 @@
-[
+{
+	"qquestions": [
 	{
 		"question": "Who is the strongest???",
 		"answers": {
@@ -27,4 +28,5 @@
 		},
 		"correctAnswer": "d"
 	}
-];
+]
+};
